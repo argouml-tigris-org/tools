@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>org.argouml</groupId>
+  <artifactId>tools</artifactId>
+  <version>0.35.1</version>
+
+  <properties>
+    <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+    <github.site.repositoryName>${project.artifactId}</github.site.repositoryName>
+  </properties>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.basedir}</directory>
+        <includes>
+          <include>checkstyle/*</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.3</version>
+	<configuration>
+          <skipDeploy>true</skipDeploy>
+	</configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.8</version>
+      </plugin>
+      <plugin>
+	<!-- Deploy the web site -->
+	<groupId>com.github.github</groupId>
+	<artifactId>site-maven-plugin</artifactId>
+	<version>0.12</version>
+        <configuration>
+          <server>github</server>
+	  <repositoryOwner>argouml-tigris-org</repositoryOwner>
+	  <repositoryName>${github.site.repositoryName}</repositoryName>
+
+          <!-- The commit message -->
+          <message>Building site for ${project.name} ${project.version}
+
+          ${github.site.repositoryName} ${site.path}
+	  </message>
+          <!-- The location where the site is uploaded -->
+          <path>${site.path}</path>
+          <merge>true</merge>
+        </configuration>
+	<executions>
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>site-deploy</phase>
+          </execution>
+	</executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <name>tools</name>
+  <description>
+Project that contains the configuration of ArgoUML tools.
+  </description>
+
+  <scm>
+    <url>https://github.com/argouml-tigris-org/${github.site.repositoryName}</url>
+    <connection>scm:git:https://github.com/argouml-tigris-org/${github.site.repositoryName}.git</connection>
+    <developerConnection>scm:git:ssh://review.gerrithub.io:29418/argouml-tigris-org/${github.site.repositoryName}.git</developerConnection>
+  </scm>
+
+</project>
