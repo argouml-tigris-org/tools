@@ -13,10 +13,13 @@
 
   <groupId>org.argouml</groupId>
   <artifactId>tools</artifactId>
-  <version>0.35.1</version>
+  <version>0.35.2-SNAPSHOT</version>
 
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+    <github.site.org>https://github.com/argouml-tigris-org</github.site.org>
+    <gerrithub.site.org.ssh>ssh://review.gerrithub.io:29418/argouml-tigris-org</gerrithub.site.org.ssh>
+    <github.site.pages>https://argouml-tigris-org.github.io</github.site.pages>
     <github.site.repositoryName>${project.artifactId}</github.site.repositoryName>
   </properties>
 
@@ -79,9 +82,16 @@ Project that contains the configuration of ArgoUML tools.
   </description>
 
   <scm>
-    <url>https://github.com/argouml-tigris-org/${github.site.repositoryName}</url>
-    <connection>scm:git:https://github.com/argouml-tigris-org/${github.site.repositoryName}.git</connection>
-    <developerConnection>scm:git:ssh://review.gerrithub.io:29418/argouml-tigris-org/${github.site.repositoryName}.git</developerConnection>
+    <url>${github.site.org}/${github.site.repositoryName}</url>
+    <connection>scm:git:${github.site.org}/${github.site.repositoryName}.git</connection>
+    <developerConnection>scm:git:${gerrithub.site.org.ssh}/${github.site.repositoryName}.git</developerConnection>
   </scm>
+
+  <distributionManagement>
+     <site>
+        <id>${project.artifactId}-site</id>
+        <url>${github.site.pages}/${github.site.repositoryName}</url>
+     </site>
+  </distributionManagement>
 
 </project>
