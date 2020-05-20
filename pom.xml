@@ -46,32 +46,37 @@
         <version>2.8</version>
       </plugin>
       <plugin>
-	<!-- Deploy the web site -->
-	<groupId>com.github.github</groupId>
-	<artifactId>site-maven-plugin</artifactId>
-	<version>0.12</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <version>3.0.0</version>
         <configuration>
-          <server>github</server>
-	  <repositoryOwner>argouml-tigris-org</repositoryOwner>
-	  <repositoryName>${github.site.repositoryName}</repositoryName>
-
-          <!-- The commit message -->
-          <message>Building site for ${project.name} ${project.version}
-
-          ${github.site.repositoryName} ${site.path}
-	  </message>
-          <!-- The location where the site is uploaded -->
-          <path>${site.path}</path>
-          <merge>true</merge>
+          <serverId>github</serverId>
+          <pubScmUrl>scm:git:${project.scm.url}</pubScmUrl>
+          <scmBranch>gh-pages</scmBranch>
+          <providerImplementations>
+	    <git>jgit</git>
+	  </providerImplementations>
         </configuration>
-	<executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-api</artifactId>
+            <version>1.11.2</version>
+          </dependency>
+	  <dependency>
+	    <groupId>org.apache.maven.scm</groupId>
+	    <artifactId>maven-scm-provider-jgit</artifactId>
+            <version>1.11.2</version>
+	  </dependency>
+	</dependencies>
+        <executions>
           <execution>
             <goals>
-              <goal>site</goal>
+              <goal>publish-scm</goal>
             </goals>
             <phase>site-deploy</phase>
           </execution>
-	</executions>
+        </executions>
       </plugin>
     </plugins>
   </build>
